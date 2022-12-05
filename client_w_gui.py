@@ -4,10 +4,13 @@ import tkinter
 import tkinter.scrolledtext
 from tkinter import simpledialog
 
+HOST = 'localhost'
+PORT = 55555  
+
 class Client:
     def __init__(self, host, port):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client.connect(('192.168.0.14', 55555))
+        self.client.connect((host, port))
         message = tkinter.Tk()
         message.withdraw()
         self.nickname = simpledialog.askstring("Apelido", "Escolha um apelido", parent = message)
@@ -98,4 +101,4 @@ class Client:
             self.client.send(message.encode('ascii'))
         self.input_area.delete('1.0', 'end ')
 
-client = Client('192.168.0.14', 55555)
+client = Client(HOST, PORT)
